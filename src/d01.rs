@@ -1,7 +1,5 @@
-#![allow(dead_code)]
-
-fn d01_freq(frequencies: &str) -> i32 {
-    let ops = frequencies.split(", ");
+pub fn d01_freq(frequencies: &str) -> i32 {
+    let ops = frequencies.lines();
     ops.fold(0, |acc, x| {
         acc + x.parse::<i32>().unwrap()
     })
@@ -24,9 +22,3 @@ fn ex3() {
     let res = d01_freq("-1, -2, -3");
     assert_eq!(res, -6);
 }
-
-// #[test]
-// fn blah() {
-//     let res = d01_freq("");
-//     println!("{}", res);
-// }
