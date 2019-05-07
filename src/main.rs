@@ -18,8 +18,12 @@ fn main() {
     let input = String::from_utf8(input_bytes).unwrap();
 
     match prog {
-        "d01" => {
-            let result = d01::d01_freq(input.as_str());
+        "d01_1" => {
+            let result = d01::freq(input.as_str());
+            println!("{}", result);
+        },
+        "d01_2" => {
+            let result = d01::dup(input.as_str());
             println!("{}", result);
         },
         _ => panic!("Unknown program"),
