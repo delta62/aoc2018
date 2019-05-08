@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::Read;
 
 mod d01;
+mod d02;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -24,6 +25,10 @@ fn main() {
         },
         "d01_2" => {
             let result = d01::dup(input.as_str());
+            println!("{}", result);
+        },
+        "d02_2" => {
+            let result = d02::checksum(input.as_str());
             println!("{}", result);
         },
         _ => panic!("Unknown program"),
