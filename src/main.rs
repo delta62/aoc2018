@@ -27,8 +27,12 @@ fn main() {
             let result = d01::dup(input.as_str());
             println!("{}", result);
         },
-        "d02_2" => {
+        "d02_1" => {
             let result = d02::checksum(input.as_str());
+            println!("{}", result);
+        },
+        "d02_2" => {
+            let result = d02::char_seq(input.as_str()).unwrap();
             println!("{}", result);
         },
         _ => panic!("Unknown program"),

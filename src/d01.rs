@@ -15,7 +15,6 @@ pub fn dup(frequencies: &str) -> i32 {
         .map(|x| x.parse::<i32>().unwrap())
         .cycle()
         .find(|x| {
-            // println!("inspect {} adding {}", current, x);
             if seen.contains(&current) {
                 true
             } else {
