@@ -1,4 +1,6 @@
 use std::collections::HashMap;
+use std::iter::Zip;
+use std::str::Chars;
 
 pub fn checksum(input: &str) -> u32 {
     let (d, t) = input
@@ -37,38 +39,40 @@ fn sum_line(input: &str) -> (bool, bool) {
 
 pub fn char_seq(input: &str) -> Option<String> {
     let mut seen: Vec<&str> = Vec::new();
-    let mut ret: Option<String> = None;
-    input.lines().for_each(|x| {
+    for x in input.lines() {
         let s = seen.iter().find(|s| is_seq(s, x));
         match s {
             Some(s) => {
-                ret = Some(common(s, x));
-                return
+                return Some(common(s, x));
             },
             None => seen.push(x),
         }
-    });
+    };
     None
 }
 
 fn is_seq(a: &str, b: &str) -> bool {
     let mut diff = 0;
-    for (c1, c2) in a.chars().zip(b.chars()) {
-        let d = i64::from(u32::from(c1)) - i64::from(u32::from(c2));
-        diff += d.abs();
+    for (c1, c2) in char_pairs(a, b) {
+        if c1 != c2 {
+            diff += 1
+        }
     }
     diff == 1
 }
 
 fn common(a: &str, b: &str) -> String {
-    let char_pairs = a.chars().zip(b.chars());
-    let v = char_pairs.fold(Vec::new(), |mut acc: Vec<char>, (x, y)| {
+    let v = char_pairs(a, b).fold(Vec::new(), |mut acc: Vec<char>, (x, y)| {
         if x == y {
             acc.push(x);
         }
         acc
     });
     v.iter().collect()
+}
+
+fn char_pairs<'a>(a: &'a str, b: &'a str) -> Zip<Chars<'a>, Chars<'a>> {
+    a.chars().zip(b.chars())
 }
 
 #[test]
