@@ -4,6 +4,7 @@ use std::io::Read;
 
 mod d01;
 mod d02;
+mod d03;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -33,6 +34,10 @@ fn main() {
         },
         "d02_2" => {
             let result = d02::char_seq(input.as_str()).unwrap();
+            println!("{}", result);
+        },
+        "d03_1" => {
+            let result = d03::overlap_count(input.as_str());
             println!("{}", result);
         },
         _ => panic!("Unknown program"),
